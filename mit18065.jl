@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.3
+# v0.17.4
 
 using Markdown
 using InteractiveUtils
@@ -10,17 +10,14 @@ begin
 	using PlutoUI
 
 	function pp(xs...)
-		io = IOBuffer()
-		ctx = IOContext(io)
 		for x ∈ xs
 			if isa(x, AbstractArray)
-				show(ctx, "text/plain", x)
+				println(repr("text/plain", x))
 			else
-				print(ctx, x)
+				print(x)
 			end
 		end
-		println(ctx)
-		println(String(take!(io)))
+		println()
 	end
 end
 
@@ -474,7 +471,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 
 # ╔═╡ Cell order:
 # ╟─246ffefa-6614-11ec-09c8-1b72223a1641
-# ╟─23e4c789-2cc8-4565-9042-02168b16beac
+# ╠═23e4c789-2cc8-4565-9042-02168b16beac
 # ╟─3d9413a9-32aa-439e-8a5d-aa60ab15a651
 # ╟─f5334940-2e47-4301-9508-ecfc7108f334
 # ╠═246fff04-6614-11ec-22e1-d995b65a10a2
