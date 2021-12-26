@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.4
+# v0.17.3
 
 using Markdown
 using InteractiveUtils
@@ -8,10 +8,18 @@ using InteractiveUtils
 begin
 	using LinearAlgebra
 	using PlutoUI
-	function pp(x)
+
+	function pp(xs...)
 		io = IOBuffer()
-		show(IOContext(io), "text/plain", x)
-		println(IOContext(io))
+		ctx = IOContext(io)
+		for x ∈ xs
+			if isa(x, AbstractArray)
+				show(ctx, "text/plain", x)
+			else
+				print(ctx, x)
+			end
+		end
+		println(ctx)
 		println(String(take!(io)))
 	end
 end
@@ -124,7 +132,7 @@ let
 	@assert size(A) == (4,3)
 	@assert size(x) == (3,)
 	@assert size(z) == (4,)
-	z
+	@assert z == zero(z)
 end
 
 # ╔═╡ 96c73c4a-f62c-41d6-bcc0-13944d3fd3c7
@@ -176,7 +184,7 @@ md"""
 """
 
 # ╔═╡ 005cde91-f411-40e8-a903-01506402c2be
-let
+PlutoUI.with_terminal() do
 	C = rand(-9:9, 3, 2)
 	R = rand(-9:9, 2, 3)
 	A = C * R
@@ -186,6 +194,10 @@ let
 	           1], C)
 	R2 = kron([0 1], R)
 	@assert A2 == C2 * R2
+
+	pp("C2:\n", C2)
+	pp("R2:\n", R2)
+	pp("A2:\n", A2)
 end
 
 # ╔═╡ df291cf8-beb9-4481-bf71-0cc67a6dab7a
@@ -199,12 +211,16 @@ md"""
 """
 
 # ╔═╡ d4f90e59-3b6b-4b51-b1ae-5c0f2b2aa8ea
-let
+PlutoUI.with_terminal() do
 	m = 3
 	p = 5
 	a = rand(-9:9, m, 1)
 	b = rand(-9:9, p, 1)
 	abT = a * transpose(b)
+	pp("a:\n", a)
+	pp("b:\n", b)
+	pp("abT:\n", abT)
+
 	@assert size(abT) == (m, p)
 
 	i = rand(1:m)
@@ -225,17 +241,19 @@ PlutoUI.with_terminal() do
 	a2 = rand(-9:9, 5, 1)
 	a3 = rand(-9:9, 5, 1)
 	A = [a1 a2 a3]
-	pp(A)
+	pp("A:\n", A)
 
 	B = I(3)
-	a1b1 = a1 * transpose(B[:,1])
-	pp(a1)
-	pp(transpose(B[:,1]))
-	pp(a1b1)
-	a2b2 = a2 * transpose(B[:,2])
-	a3b3 = a3 * transpose(B[:,3])
+	pp("B:\n", B)
 
+	a1b1 = a1 * B[:,1]'
+	a2b2 = a2 * B[:,2]'
+	a3b3 = a3 * B[:,3]'
 	@assert a1b1 + a2b2 + a3b3 == A
+
+	pp("a1:\n", a1)
+	pp("b'1:\n", B[:,1]')
+	pp("a1b'1:\n", a1b1)
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -456,7 +474,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 
 # ╔═╡ Cell order:
 # ╟─246ffefa-6614-11ec-09c8-1b72223a1641
-# ╠═23e4c789-2cc8-4565-9042-02168b16beac
+# ╟─23e4c789-2cc8-4565-9042-02168b16beac
 # ╟─3d9413a9-32aa-439e-8a5d-aa60ab15a651
 # ╟─f5334940-2e47-4301-9508-ecfc7108f334
 # ╠═246fff04-6614-11ec-22e1-d995b65a10a2
