@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.4
+# v0.17.3
 
 using Markdown
 using InteractiveUtils
@@ -20,91 +20,6 @@ begin
 		println()
 	end
 end
-
-# ╔═╡ 246ffefa-6614-11ec-09c8-1b72223a1641
-html"""
-	<div>Happy holiday! Remember to take care of yourself and your loved ones!</div>
-<div id="snow"></div>
-<style>
-	body:not(.disable_ui):not(.more-specificity) {
-        background-color:#e9ecff;
-    }
-	pluto-output{
-		border-radius: 0px 8px 0px 0px;
-        background-color:#e9ecff;
-	}
-	#snow {
-        position: fixed;
-    	top: 0;
-    	left: 0;
-    	right: 0;
-    	bottom: 0;
-    	pointer-events: none;
-    	z-index: 1000;
-	}
-</style>
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-        setTimeout(() => window.particlesJS("snow", {
-            "particles": {
-                "number": {
-                    "value": 70,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ffffff"
-                },
-                "opacity": {
-                    "value": 0.7,
-                    "random": false,
-                    "anim": {
-                        "enable": false
-                    }
-                },
-                "size": {
-                    "value": 5,
-                    "random": true,
-                    "anim": {
-                        "enable": false
-                    }
-                },
-                "line_linked": {
-                    "enable": false
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 5,
-                    "direction": "bottom",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": true,
-                        "rotateX": 300,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "events": {
-                    "onhover": {
-                        "enable": false
-                    },
-                    "onclick": {
-                        "enable": false
-                    },
-                    "resize": false
-                }
-            },
-            "retina_detect": true
-        }), 3000);
-	</script>
-"""
-
 
 # ╔═╡ 3d9413a9-32aa-439e-8a5d-aa60ab15a651
 md"""
@@ -252,6 +167,17 @@ PlutoUI.with_terminal() do
 	pp("b'1:\n", B[:,1]')
 	pp("a1b'1:\n", a1b1)
 end
+
+# ╔═╡ 56a8646f-b8b7-4241-acb6-db64333ca508
+md"""
+### Orthonormal Columns In ``Q`` Give ``Q’Q = I``
+"""
+
+# ╔═╡ f6db2e64-dfb2-42bc-82f5-4937f78a647d
+md"""
+**(3.2)** Draw unit vectors ``\mathbf{u}`` and ``\mathbf{v}`` that are *not* orthogonal. Show that ``\mathbf{w} = \mathbf{v} − \mathbf{u}(\mathbf{u}^\mathsf{T}\mathbf{v})`` is orthogonal to ``\mathbf{u}`` (and add ``\mathbf{w}`` to your picture).
+
+"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -470,8 +396,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 """
 
 # ╔═╡ Cell order:
-# ╟─246ffefa-6614-11ec-09c8-1b72223a1641
-# ╠═23e4c789-2cc8-4565-9042-02168b16beac
+# ╟─23e4c789-2cc8-4565-9042-02168b16beac
 # ╟─3d9413a9-32aa-439e-8a5d-aa60ab15a651
 # ╟─f5334940-2e47-4301-9508-ecfc7108f334
 # ╠═246fff04-6614-11ec-22e1-d995b65a10a2
@@ -486,5 +411,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═d4f90e59-3b6b-4b51-b1ae-5c0f2b2aa8ea
 # ╟─ced55756-9423-4f66-a755-fa7afb61c159
 # ╠═3d07a918-0263-4d1e-9187-b0adbbe20203
+# ╟─56a8646f-b8b7-4241-acb6-db64333ca508
+# ╟─f6db2e64-dfb2-42bc-82f5-4937f78a647d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
