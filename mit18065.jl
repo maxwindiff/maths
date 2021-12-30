@@ -177,7 +177,7 @@ md"""
 
 # ╔═╡ f6db2e64-dfb2-42bc-82f5-4937f78a647d
 md"""
-**(3.2)** Draw unit vectors ``\mathbf{u}`` and ``\mathbf{v}`` that are *not* orthogonal. Show that ``\mathbf{w} = \mathbf{v} − \mathbf{u}(\mathbf{u}^\mathsf{T}\mathbf{v})`` is orthogonal to ``\mathbf{u}`` (and add ``\mathbf{w}`` to your picture).
+**(3.2)** Draw unit vectors ``\mathbf{u}`` and ``\mathbf{v}`` that are not orthogonal. Show that ``\mathbf{w} = \mathbf{v} − \mathbf{u}(\mathbf{u}^\mathsf{T}\mathbf{v})`` is orthogonal to ``\mathbf{u}`` (and add ``\mathbf{w}`` to your picture).
 
 """
 
@@ -196,7 +196,7 @@ end
 
 # ╔═╡ 13690156-b8f1-4768-b306-da7312e02f42
 md"""
-**(3.4)** Key property of every orthogonal matrix : ``||Q\mathbf{x}||^2 = ||\mathbf{x}||^2`` for every vector ``\mathbf{x}``. More than this, show that ``(Q\mathbf{x})^\mathsf{T}(Q\mathbf{y}) = \mathbf{x}^\mathsf{T}\mathbf{y}`` for every vector ``\mathbf{x}`` and ``\mathbf{y}``. So *lengths and angles are not changed by ``Q``*. **Computations with ``Q`` never overflow!**
+**(3.4)** Key property of every orthogonal matrix : ``||Q\mathbf{x}||^2 = ||\mathbf{x}||^2`` for every vector ``\mathbf{x}``. More than this, show that ``(Q\mathbf{x})^\mathsf{T}(Q\mathbf{y}) = \mathbf{x}^\mathsf{T}\mathbf{y}`` for every vector ``\mathbf{x}`` and ``\mathbf{y}``. So lengths and angles are not changed by ``Q``. Computations with ``Q`` never overflow!
 """
 
 # ╔═╡ 1c12c1de-93a6-4b0d-ab73-65a77866ad3f
@@ -213,7 +213,7 @@ md"""
 
 # ╔═╡ 9c1e24e8-5645-40a2-8710-28652b044fe5
 md"""
-**(3.6)** A **permutation matrix** has the same columns as the identity matrix (in some order). *Explain why this permutation matrix and every permutation matrix is orthogonal*:
+**(3.6)** A **permutation matrix** has the same columns as the identity matrix (in some order). Explain why this permutation matrix and every permutation matrix is orthogonal:
 
 ```math
 \begin{equation*}
@@ -228,7 +228,7 @@ P =
 ```
 has orthonormal basis so ``P^\mathsf{T}P = \_\_`` and ``P^{-1} = \_\_``.
 
-When a matrix is symmetric or orthogonal, **it will have orthogonal eigenvectors**. This is the most important source of orthogonal vectors in applied mathematics.
+When a matrix is symmetric or orthogonal, it will have orthogonal eigenvectors. This is the most important source of orthogonal vectors in applied mathematics.
 """
 
 # ╔═╡ 9902ff32-2f28-4685-ac4e-a7ca492afe04
@@ -247,6 +247,107 @@ let
 	     0 0 0 1
 	     1 0 0 0]
 	P' * P
+end
+
+# ╔═╡ f3f2074c-ed22-4637-93f9-1f59dc95f00d
+md"""
+### 4. Eigenvalues and Eigenvectors
+"""
+
+# ╔═╡ 30f3bf26-c49b-450e-8679-6f1536dd6a9e
+md"""
+**(4.2)** Compute the eigenvalues and eigenvectors of ``A`` and ``A^{−1}``. Check the trace!
+
+```math
+\begin{equation*}
+A =
+\begin{bmatrix}
+0 & 2 \\
+1 & 1 \\
+\end{bmatrix}
+
+\ \ \textrm{and} \ \ \
+
+A^{-1} =
+\begin{bmatrix}
+-1/2 & 1 \\
+1/2 & 0 \\
+\end{bmatrix}
+\end{equation*}
+```
+"""
+
+# ╔═╡ f070e8d6-3514-4f11-9167-11842fbb61ff
+PlutoUI.with_terminal() do
+	A = [0 2
+	     1 1]
+	println("λ(A) = ", eigvals(A))
+	pp(eigvecs(A))
+
+	A1 = inv(A)
+	println("λ(A1) = ", eigvals(A1))
+	pp(eigvecs(A1))
+end
+
+# ╔═╡ 0d0b23de-76f4-4e95-9f15-4e3c960b2935
+md"""
+This is because:
+
+```math
+\begin{equation*}
+\begin{aligned}
+A x &= λ x \\
+A^{-1}Ax &= A^{-1} λ x \\
+x &= A^{-1} λ x \\
+\frac{1}{λ} x &= A^{-1} x
+\end{aligned}
+\end{equation*}
+```
+"""
+
+# ╔═╡ bb82e3a6-8783-48a3-8807-c2836140fc97
+md"""
+**(4.11)** The eigenvalues of ``A`` equal the eigenvalues of ``A^\mathsf{T}``. This is because ``\textrm{det}(A − λI)`` equals ``\textrm{det}(A^\mathsf{T} − λI)``. That is true because __. Show by an example that the eigenvectors of ``A`` and ``A^\mathsf{T}`` are not the same.
+"""
+
+# ╔═╡ fb7f94d5-b746-4d40-8f8e-0127da73260c
+PlutoUI.with_terminal() do
+	A = [0 2
+	     1 1]
+	println("λ(A) = ", eigvals(A), "\n")
+	pp("eigvecs(A) = ", eigvecs(A))
+
+	println("λ(A') = ", eigvals(A'), "\n")
+	pp("eigvecs(A') = ", eigvecs(A'))
+end
+
+# ╔═╡ e276d15d-c643-44fa-a64a-e221a1620d24
+md"""
+**(4.15)** Factor these two matrices into ``A = X Λ X^{-1}``:
+"""
+
+# ╔═╡ e31e2250-00ba-46c6-93c2-0f47b5562f1c
+PlutoUI.with_terminal() do
+	A = [1 2
+	     0 3]
+	X = eigvecs(A)
+	Λ = Diagonal(eigvals(A))
+	@assert A ≈ X * Λ * inv(X)
+
+	pp("X = ", X)
+	pp("Λ = ", Λ)
+end
+
+# ╔═╡ 36767f04-0101-4188-847f-633c4b21079a
+PlutoUI.with_terminal() do
+	A = [1 1
+	     3 3]
+	X = eigvecs(A)
+	Λ = Diagonal(eigvals(A))
+	@assert A ≈ X * Λ * inv(X)
+
+	pp("X = ", X)
+	pp("Λ = ", Λ)
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -489,5 +590,14 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─9c1e24e8-5645-40a2-8710-28652b044fe5
 # ╟─9902ff32-2f28-4685-ac4e-a7ca492afe04
 # ╠═2a3b2f9f-da40-45c9-a72e-b2a85f488981
+# ╟─f3f2074c-ed22-4637-93f9-1f59dc95f00d
+# ╟─30f3bf26-c49b-450e-8679-6f1536dd6a9e
+# ╠═f070e8d6-3514-4f11-9167-11842fbb61ff
+# ╟─0d0b23de-76f4-4e95-9f15-4e3c960b2935
+# ╟─bb82e3a6-8783-48a3-8807-c2836140fc97
+# ╠═fb7f94d5-b746-4d40-8f8e-0127da73260c
+# ╟─e276d15d-c643-44fa-a64a-e221a1620d24
+# ╠═e31e2250-00ba-46c6-93c2-0f47b5562f1c
+# ╠═36767f04-0101-4188-847f-633c4b21079a
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
