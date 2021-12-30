@@ -350,6 +350,47 @@ PlutoUI.with_terminal() do
 	pp("Λ = ", Λ)
 end
 
+# ╔═╡ c1813778-6a52-4ba8-abee-57377f1d50fa
+md"""
+### 5. Positive Definite and Semidefinite Matrices
+"""
+
+# ╔═╡ e1285f5d-121b-4be5-80ea-afcb7cc87536
+md"""
+**(5.3)** For which numbers ``b`` and ``c`` are these matrices positive definite?
+
+```math
+\begin{equation*}
+S =
+\begin{bmatrix}
+1 & b \\
+b & 9 \\
+\end{bmatrix}
+
+\ \ \ \ \ \
+
+S =
+\begin{bmatrix}
+2 & 4 \\
+4 & c \\
+\end{bmatrix}
+
+\ \ \ \ \ \
+
+S =
+\begin{bmatrix}
+c & b \\
+b & c \\
+\end{bmatrix}
+\end{equation*}
+```
+
+With the pivots in ``D`` and multiplier in ``L``, factor each ``A`` into ``LDL^\mathsf{T}``.
+"""
+
+# ╔═╡ 9aa0517f-7755-4264-a0f1-2d8483c629cf
+
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -364,7 +405,7 @@ PlutoUI = "~0.7.27"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -599,5 +640,8 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─e276d15d-c643-44fa-a64a-e221a1620d24
 # ╠═e31e2250-00ba-46c6-93c2-0f47b5562f1c
 # ╠═36767f04-0101-4188-847f-633c4b21079a
+# ╟─c1813778-6a52-4ba8-abee-57377f1d50fa
+# ╟─e1285f5d-121b-4be5-80ea-afcb7cc87536
+# ╠═9aa0517f-7755-4264-a0f1-2d8483c629cf
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
