@@ -75,6 +75,8 @@ md"""
 
 # ╔═╡ 5af2ab12-84bb-4cf5-b632-ffdfce21b8d0
 md"""
+**Ans:**
+
 ``m`` is 3.
 
 ``n`` is at least 3.
@@ -170,7 +172,7 @@ end
 
 # ╔═╡ 56a8646f-b8b7-4241-acb6-db64333ca508
 md"""
-### Orthonormal Columns In ``Q`` Give ``Q’Q = I``
+### 3. Orthonormal Columns In ``Q`` Give ``Q’Q = I``
 """
 
 # ╔═╡ f6db2e64-dfb2-42bc-82f5-4937f78a647d
@@ -178,6 +180,74 @@ md"""
 **(3.2)** Draw unit vectors ``\mathbf{u}`` and ``\mathbf{v}`` that are *not* orthogonal. Show that ``\mathbf{w} = \mathbf{v} − \mathbf{u}(\mathbf{u}^\mathsf{T}\mathbf{v})`` is orthogonal to ``\mathbf{u}`` (and add ``\mathbf{w}`` to your picture).
 
 """
+
+# ╔═╡ 77b1153f-e462-4c75-934d-1766ee7dc89a
+PlutoUI.with_terminal() do
+	u = normalize([1, 0])
+	v = normalize([1, 2])
+	w = v - u * (u' * v)
+	println("u = ", u)
+	println("v = ", v)
+	println("u'v = ", u'*v)
+	println("u(u'v) = ", u*(u'*v))
+	println("w = ", w)
+	println(u'*w)
+end
+
+# ╔═╡ 13690156-b8f1-4768-b306-da7312e02f42
+md"""
+**(3.4)** Key property of every orthogonal matrix : ``||Q\mathbf{x}||^2 = ||\mathbf{x}||^2`` for every vector ``\mathbf{x}``. More than this, show that ``(Q\mathbf{x})^\mathsf{T}(Q\mathbf{y}) = \mathbf{x}^\mathsf{T}\mathbf{y}`` for every vector ``\mathbf{x}`` and ``\mathbf{y}``. So *lengths and angles are not changed by ``Q``*. **Computations with ``Q`` never overflow!**
+"""
+
+# ╔═╡ 1c12c1de-93a6-4b0d-ab73-65a77866ad3f
+md"""
+**Ans:**
+
+```math
+\begin{align}
+(Q\mathbf{x})^\mathsf{T}(Q\mathbf{y}) &= \mathbf{x}^\mathsf{T}Q^\mathsf{T}Q\mathbf{y} \\
+&= \mathbf{x}^\mathsf{T}\mathbf{y}
+\end{align}
+```
+"""
+
+# ╔═╡ 9c1e24e8-5645-40a2-8710-28652b044fe5
+md"""
+**(3.6)** A **permutation matrix** has the same columns as the identity matrix (in some order). *Explain why this permutation matrix and every permutation matrix is orthogonal*:
+
+```math
+\begin{equation*}
+P = 
+\begin{bmatrix}
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 \\
+\end{bmatrix}
+\end{equation*}
+```
+has orthonormal basis so ``P^\mathsf{T}P = \_\_`` and ``P^{-1} = \_\_``.
+
+When a matrix is symmetric or orthogonal, **it will have orthogonal eigenvectors**. This is the most important source of orthogonal vectors in applied mathematics.
+"""
+
+# ╔═╡ 9902ff32-2f28-4685-ac4e-a7ca492afe04
+md"""
+**Ans:** By definition, permutation matrices are row/column permutations of the identity matrix, so rows/columns are orthogonal to each other and have norm 1.
+
+``P^\mathsf{T}P = I``
+
+``P^{-1} = P^\mathsf{T}``
+"""
+
+# ╔═╡ 2a3b2f9f-da40-45c9-a72e-b2a85f488981
+let
+	P = [0 1 0 0
+	     0 0 1 0
+	     0 0 0 1
+	     1 0 0 0]
+	P' * P
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -413,5 +483,11 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═3d07a918-0263-4d1e-9187-b0adbbe20203
 # ╟─56a8646f-b8b7-4241-acb6-db64333ca508
 # ╟─f6db2e64-dfb2-42bc-82f5-4937f78a647d
+# ╠═77b1153f-e462-4c75-934d-1766ee7dc89a
+# ╟─13690156-b8f1-4768-b306-da7312e02f42
+# ╟─1c12c1de-93a6-4b0d-ab73-65a77866ad3f
+# ╟─9c1e24e8-5645-40a2-8710-28652b044fe5
+# ╟─9902ff32-2f28-4685-ac4e-a7ca492afe04
+# ╠═2a3b2f9f-da40-45c9-a72e-b2a85f488981
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
