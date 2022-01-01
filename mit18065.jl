@@ -389,7 +389,198 @@ With the pivots in ``D`` and multiplier in ``L``, factor each ``A`` into ``LDL^\
 """
 
 # ╔═╡ 9aa0517f-7755-4264-a0f1-2d8483c629cf
+md"""
+(a)
+```math
+\begin{align}
+9 - b^2 &> 0 \\
+b^2 &< 9 \\
+-3 &< b < 3
+\end{align}
+```
 
+```math
+\begin{bmatrix}
+1 & b \\
+b & 9 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+b & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 \\
+0 & 9-b^2 \\
+\end{bmatrix}
+\begin{bmatrix}
+1 & b \\
+0 & 1 \\
+\end{bmatrix}
+```
+
+(b)
+```math
+\begin{align}
+2c - 16 &> 0 \\
+c &> 8 \\
+\end{align}
+```
+
+```math
+\begin{bmatrix}
+2 & 4 \\
+4 & c \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+2 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+2 & 0 \\
+0 & c-8 \\
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 \\
+0 & 1 \\
+\end{bmatrix}
+```
+
+(c)
+```math
+\begin{align}
+c^2 - b^2 &> 0 \ \ \ \ \ \ c > 0 \\
+c^2 &> b^2 \\
+\end{align}
+```
+
+```math
+\begin{bmatrix}
+c & b \\
+b & c \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+\frac{b}{c} & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+c & 0 \\
+0 & c-\frac{b^2}{c} \\
+\end{bmatrix}
+\begin{bmatrix}
+1 & \frac{b}{c} \\
+0 & 1 \\
+\end{bmatrix}
+```
+"""
+
+# ╔═╡ f2312f44-b8c2-40a7-9d00-612d885fa251
+md"""
+**(5.14)** Find the 3 by 3 matrix ``S`` and its pivots, rank, eigenvalues, and determinant:
+
+```math
+\begin{bmatrix}
+x_1 & x_2 & x_3
+\end{bmatrix}
+
+\begin{bmatrix}
+S
+\end{bmatrix}
+
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix}
+
+=
+
+4(x_1 - x_2 + 2x_3)^2
+```
+"""
+
+# ╔═╡ 36132f61-c023-4594-8be4-87adac957243
+md"""
+```math
+S =
+\begin{bmatrix}
+4 & 0 & 0 \\
+0 & -4 & 0 \\
+0 & 0 & 8 \\
+\end{bmatrix}
+```
+
+Rank = 3 \
+Eigenvalues = 4, -4, 8 \
+Determinant = -128
+"""
+
+# ╔═╡ 208c0647-e204-4a0b-aef9-d3b322755c95
+md"""
+**(5.15)** Compute the three upper left determinants of ``S`` to establish positive definiteness. Verify that their ratios give the second and third pivots.
+
+Pivots = ratios of determinants
+
+```math
+S =
+\begin{bmatrix}
+2 & 2 & 0 \\
+2 & 5 & 3 \\
+0 & 3 & 8 \\
+\end{bmatrix}
+```
+"""
+
+# ╔═╡ 737aff29-4283-4805-8c90-47aad40ee538
+md"""
+**Ans:**
+
+```math
+\begin{align}
+
+\textrm{det}(
+\begin{bmatrix}
+2
+\end{bmatrix}
+) &= 2
+
+\\
+
+\textrm{det}(
+\begin{bmatrix}
+2 & 2 \\
+2 & 5 \\
+\end{bmatrix}
+) &= 6
+
+\\
+
+
+\textrm{det}(
+\begin{bmatrix}
+2 & 2 & 0 \\
+2 & 5 & 3 \\
+0 & 3 & 8 \\
+\end{bmatrix}
+) &= 30
+
+\end{align}
+```
+
+```math
+S =
+\begin{bmatrix}
+1 & 0 & 0 \\
+1 & 1 & 0 \\
+0 & 1 & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+2 & 2 & 0 \\
+0 & 3 & 3 \\
+0 & 0 & 5 \\
+\end{bmatrix}
+```
+"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -642,6 +833,10 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═36767f04-0101-4188-847f-633c4b21079a
 # ╟─c1813778-6a52-4ba8-abee-57377f1d50fa
 # ╟─e1285f5d-121b-4be5-80ea-afcb7cc87536
-# ╠═9aa0517f-7755-4264-a0f1-2d8483c629cf
+# ╟─9aa0517f-7755-4264-a0f1-2d8483c629cf
+# ╟─f2312f44-b8c2-40a7-9d00-612d885fa251
+# ╟─36132f61-c023-4594-8be4-87adac957243
+# ╟─208c0647-e204-4a0b-aef9-d3b322755c95
+# ╟─737aff29-4283-4805-8c90-47aad40ee538
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
