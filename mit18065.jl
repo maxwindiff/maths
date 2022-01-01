@@ -19,6 +19,10 @@ begin
 		end
 		println()
 	end
+
+	md"""
+	Exercises for [MIT 18.065](https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/assignments/)
+	"""
 end
 
 # ╔═╡ 3d9413a9-32aa-439e-8a5d-aa60ab15a651
@@ -582,6 +586,55 @@ S =
 ```
 """
 
+# ╔═╡ 585396de-0dab-4860-b155-5567bd66c949
+md"""
+### 6. Singular Value Decomposition (SVD)
+"""
+
+# ╔═╡ 3193def8-95b0-4eda-bafa-8808374be2bd
+md"""
+**(6.1)** A symmetric matrix ``S = S^\mathsf{T}`` has orthonormal eigenvectors ``\mathbf{v}_1`` to ``\mathbf{v}_n``. Then any vector ``\mathbf{x}`` can be written as a combination ``\mathbf{x} = c_1\mathbf{v}_1 + ... + c_n\mathbf{v}_n``. Explain these two formulas:
+
+```math
+\mathbf{x}^\mathsf{T}\mathbf{x} = c_1^2 + ... + c_n^2
+\ \ \ \ \ \ \ \ \ \ \ \ \ \
+\mathbf{x}^\mathsf{T}S\mathbf{x} = λ_1 c_1^2 + ... + λ_n c_2^2
+```
+"""
+
+# ╔═╡ 864dd0cd-44a9-4ef6-9471-a8dbf66cfd5d
+md"""
+**Ans:** Self evident.
+"""
+
+# ╔═╡ c07fde15-3c68-42cd-ba68-52fea34937f1
+md"""
+**(6.6)** Find the ``σ``'s and ``\mathbf{v}``'s and ``\mathbf{u}``'s in the SVD for ``A = \begin{bmatrix}3 & 4 \\ 0 & 5\end{bmatrix}``. Use equation (12).
+"""
+
+# ╔═╡ 0a45d77a-566c-4218-b8bc-5c70b9d17ca8
+md"""
+**Ans:**
+
+```math
+A^\mathsf{T}A =
+\begin{bmatrix}
+9 & 12 \\
+12 & 41 \\
+\end{bmatrix}
+```
+
+```math
+AA^\mathsf{T} =
+\begin{bmatrix}
+25 & 20 \\
+20 & 25 \\
+\end{bmatrix}
+```
+
+``...``
+"""
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -838,5 +891,10 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─36132f61-c023-4594-8be4-87adac957243
 # ╟─208c0647-e204-4a0b-aef9-d3b322755c95
 # ╟─737aff29-4283-4805-8c90-47aad40ee538
+# ╟─585396de-0dab-4860-b155-5567bd66c949
+# ╟─3193def8-95b0-4eda-bafa-8808374be2bd
+# ╟─864dd0cd-44a9-4ef6-9471-a8dbf66cfd5d
+# ╟─c07fde15-3c68-42cd-ba68-52fea34937f1
+# ╠═0a45d77a-566c-4218-b8bc-5c70b9d17ca8
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
