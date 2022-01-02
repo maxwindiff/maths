@@ -20,7 +20,9 @@ begin
 	term = PlutoUI.with_terminal
 
 	md"""
-	Exercises for [MIT 18.065](https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/assignments/)
+	Assignments of [MIT 18.065 - Matrix Methods in Data Analysis, Signal Processing, and Machine Learning](https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/assignments/)
+
+	Source: [https://github.com/maxwindiff/maths](https://github.com/maxwindiff/maths)
 	"""
 end
 
@@ -463,8 +465,12 @@ term() do
 	pp("det2/det1 = ", det(S[1:2,1:2]) / det(S[1:1,1:1]))
 	pp("det3/det2 = ", det(S[1:3,1:3]) / det(S[1:2,1:2]))
 
-	L = [1 0 0; 1 1 0; 0 1 1]
-	U = [2 2 0; 0 3 3; 0 0 5]
+	L = [1 0 0
+		 1 1 0
+		 0 1 1]
+	U = [2 2 0
+		 0 3 3
+		 0 0 5]
 	@assert L * U == S
 	println("pivots = ", diag(U))
 end
@@ -494,6 +500,9 @@ md"""
 md"""
 **(6.6)** Find the ``σ``'s and ``\mathbf{v}``'s and ``\mathbf{u}``'s in the SVD for ``A = \begin{bmatrix}3 & 4 \\ 0 & 5\end{bmatrix}``. Use equation (12).
 """
+
+# ╔═╡ 9c4089eb-e163-4104-a867-c4320816da46
+
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1249,5 +1258,6 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─3193def8-95b0-4eda-bafa-8808374be2bd
 # ╟─864dd0cd-44a9-4ef6-9471-a8dbf66cfd5d
 # ╟─c07fde15-3c68-42cd-ba68-52fea34937f1
+# ╠═9c4089eb-e163-4104-a867-c4320816da46
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
