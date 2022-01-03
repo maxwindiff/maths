@@ -506,19 +506,80 @@ term() do
 	A = [3 4
 	     0 5]
 
-	u = eigvecs(A*A')
-	pp("AA' = ", A*A')
-	pp("u = ", u)
-
-	v = eigvecs(A'A)
+	vals, V = eigen(A'A)
+	Σ = Diagonal(sqrt.(vals))
 	pp("A'A = ", A'A)
-	pp("v = ", v)
+	pp("V = ", V)
+	pp("Σ = ", Σ)
 
-	σ = Diagonal(sqrt.(eigvals(A'A)))
-	@assert eigvals(A'A) ≈ eigvals(A * A')
-	pp("σ = ", σ)
+	uvals, U = eigen(A*A')
+	if uvals ≉ vals
+		U = circshift(U, (0, 1))  # make sure eigenvectors are in the same order
+	end
+	pp("AA' = ", A*A')
+	pp("U = ", U)
 
-	@assert A ≈ u * σ * v'
+	@assert A ≈ U * Σ * V'
+end
+
+# ╔═╡ 466b265f-134c-4da8-b728-e35561c7f7fb
+md"""
+**(Book p.61)** If ``S = Q Λ Q^\mathsf{T}`` is symmetric positive definite, what is its SVD?
+"""
+
+# ╔═╡ c419a67a-7fc9-4d0d-ac9d-538e8a1b287c
+term() do
+	Q, _ = qr(randn(3,3))
+	D = Diagonal([3, 2, 1])
+	S = Q * D * Q'
+	U, Σ, V = svd(S)
+
+	pp("Q = ", Q)
+	pp("U = ", U)
+	pp("Σ = ", round.(Σ))
+	pp("V = ", V)
+
+	@assert U ≈ V ≈ Q
+	@assert Diagonal(Σ) ≈ D
+end
+
+# ╔═╡ 8bac8f84-790d-4d1e-ba47-f73b19472ff6
+md"""
+**(Book p.61)** If ``S = Q Λ Q^\mathsf{T}`` has a negative eigenvalue (``S\mathbf{x} = -α\mathbf{x}``), what is the singular value and what are the vectors ``\mathbf{v}`` and ``\mathbf{u}``?
+"""
+
+# ╔═╡ f53215cd-79b6-4343-9730-633a7db80c56
+term() do
+	Q, _ = qr(randn(3,3))
+	D = Diagonal([3, 2, -1])
+	S = Q * D * Q'
+	U, Σ, V = svd(S)
+
+	pp("Q = ", Q)
+	pp("U = ", U)
+	pp("Σ = ", round.(Σ))
+	pp("V = ", V)  # v₃ is negated
+end
+
+# ╔═╡ 522e7390-ff59-49c8-97ee-13ac7d85aed2
+md"""
+**(Book p.61)** If ``A = Q`` is an orthogonal matrix, why does every singular value equal 1?
+"""
+
+# ╔═╡ 4f503ec2-3c7b-4b1d-bf86-ab7dc27c085b
+term() do
+	Q, _ = qr(randn(3,3))
+	Q = Matrix(Q)
+	vals, V = eigen(Q'Q)
+
+	pp("Q = ", Q)
+	pp("Q'Q = ", round.(Q'Q, digits=5))
+	pp("λ(Q'Q) = ", round.(vals, digits=5))
+
+	# UΣ=QV ==> U=QV ==> V=I, U=Q
+	Σ = Diagonal(sqrt.(vals))
+	U = Q * V
+	@assert Q ≈ U * Σ * V'
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1276,5 +1337,11 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─864dd0cd-44a9-4ef6-9471-a8dbf66cfd5d
 # ╟─c07fde15-3c68-42cd-ba68-52fea34937f1
 # ╠═9c4089eb-e163-4104-a867-c4320816da46
+# ╟─466b265f-134c-4da8-b728-e35561c7f7fb
+# ╠═c419a67a-7fc9-4d0d-ac9d-538e8a1b287c
+# ╟─8bac8f84-790d-4d1e-ba47-f73b19472ff6
+# ╠═f53215cd-79b6-4343-9730-633a7db80c56
+# ╟─522e7390-ff59-49c8-97ee-13ac7d85aed2
+# ╠═4f503ec2-3c7b-4b1d-bf86-ab7dc27c085b
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
