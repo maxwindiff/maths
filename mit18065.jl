@@ -536,10 +536,11 @@ term() do
 
 	pp("Q = ", Q)
 	pp("U = ", U)
-	pp("Σ = ", round.(Σ))
+	println("Σ = ", round.(Σ), "\n")
 	pp("V = ", V)
 
-	@assert U ≈ V ≈ Q
+	@assert U ≈ V
+	@assert all(abs.(U ./ Q) .≈ 1)  # columns of U may be negated from Q
 	@assert Diagonal(Σ) ≈ D
 end
 
@@ -557,7 +558,7 @@ term() do
 
 	pp("Q = ", Q)
 	pp("U = ", U)
-	pp("Σ = ", round.(Σ))
+	pp("Σ = ", round.(Σ))  # singular values still positive
 	pp("V = ", V)  # v₃ is negated
 end
 
@@ -569,16 +570,17 @@ md"""
 # ╔═╡ 4f503ec2-3c7b-4b1d-bf86-ab7dc27c085b
 term() do
 	Q, _ = qr(randn(3,3))
-	Q = Matrix(Q)
-	vals, V = eigen(Q'Q)
 
+	# Q'Q is I, so eigenvalues are all 1.
 	pp("Q = ", Q)
 	pp("Q'Q = ", round.(Q'Q, digits=5))
-	pp("λ(Q'Q) = ", round.(vals, digits=5))
+	pp("λ(Q'Q) = ", round.(eigvals(Q'Q), digits=5))
 
-	# UΣ=QV ==> U=QV ==> V=I, U=Q
-	Σ = Diagonal(sqrt.(vals))
-	U = Q * V
+	# one way to decompose: UΣ=QV where V=I, U=Q, Σ=I ==> QI=QI
+	Σ = Diagonal(sqrt.(eigvals(Q'Q)))
+	@assert Σ ≈ I
+	U = Q
+	V = I
 	@assert Q ≈ U * Σ * V'
 end
 
