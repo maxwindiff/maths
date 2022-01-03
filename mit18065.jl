@@ -156,23 +156,23 @@ md"""
 
 # ╔═╡ 3d07a918-0263-4d1e-9187-b0adbbe20203
 term() do
-	a1 = rand(-9:9, 5, 1)
-	a2 = rand(-9:9, 5, 1)
-	a3 = rand(-9:9, 5, 1)
-	A = [a1 a2 a3]
+	a₁ = rand(-9:9, 5, 1)
+	a₂ = rand(-9:9, 5, 1)
+	a₃ = rand(-9:9, 5, 1)
+	A = [a₁ a₂ a₃]
 	pp("A:\n", A)
 
 	B = I(3)
 	pp("B:\n", B)
 
-	a1b1 = a1 * B[:,1]'
-	a2b2 = a2 * B[:,2]'
-	a3b3 = a3 * B[:,3]'
-	@assert a1b1 + a2b2 + a3b3 == A
+	a₁b₁T = a₁ * B[:,1]'
+	a₂b₂T = a₂ * B[:,2]'
+	a₃b₃T = a₃ * B[:,3]'
+	@assert a₁b₁T + a₂b₂T + a₃b₃T == A
 
-	pp("a1:\n", a1)
-	pp("b'1:\n", B[:,1]')
-	pp("a1b'1:\n", a1b1)
+	pp("a₁:\n", a₁)
+	pp("b₁':\n", B[:,1]')
+	pp("a₁b₁':\n", a₁b₁T)
 end
 
 # ╔═╡ 56a8646f-b8b7-4241-acb6-db64333ca508
@@ -289,9 +289,9 @@ term() do
 	println("λ(A) = ", eigvals(A))
 	pp(eigvecs(A))
 
-	A1 = inv(A)
-	println("λ(A1) = ", eigvals(A1))
-	pp(eigvecs(A1))
+	A⁻¹ = inv(A)
+	println("λ(A⁻¹) = ", eigvals(A⁻¹))
+	pp(eigvecs(A⁻¹))
 end
 
 # ╔═╡ 0d0b23de-76f4-4e95-9f15-4e3c960b2935
@@ -430,12 +430,12 @@ x_1 \\ x_2 \\ x_3
 
 # ╔═╡ 86cb5caf-667a-465d-970c-047c6ee0e515
 term() do
-	@variables x1 x2 x3
-	pp("RHS = ", simplify(4(x1 - x2 + 2x3)^2; expand=true))
+	@variables x₁ x₂ x₃
+	pp("RHS = ", simplify(4(x₁ - x₂ + 2x₃)^2; expand=true))
 
 	v = [2, -2, 4]
 	S = v * v'
-	pp("LHS = ", simplify.([x1 x2 x3] * S * [x1, x2, x3]; expand=true))
+	pp("LHS = ", simplify.([x₁ x₂ x₃] * S * [x₁, x₂, x₃]; expand=true))
 
 	@assert rank(S) == 1  # because S is the outer product of two vectors
 	@assert det(S) == 0   # because S has rank 1 (not full rank)
@@ -502,7 +502,24 @@ md"""
 """
 
 # ╔═╡ 9c4089eb-e163-4104-a867-c4320816da46
+term() do
+	A = [3 4
+	     0 5]
 
+	u = eigvecs(A*A')
+	pp("AA' = ", A*A')
+	pp("u = ", u)
+
+	v = eigvecs(A'A)
+	pp("A'A = ", A'A)
+	pp("v = ", v)
+
+	σ = Diagonal(sqrt.(eigvals(A'A)))
+	@assert eigvals(A'A) ≈ eigvals(A * A')
+	pp("σ = ", σ)
+
+	@assert A ≈ u * σ * v'
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
